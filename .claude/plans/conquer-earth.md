@@ -32,11 +32,11 @@ Ship as part of OCPv (OpenShift Container Platform Virtualization) to provide:
 
 - [ ] Add LICENSE file (Apache 2.0) (Priority: high)
 - [x] Create CONTRIBUTING.md guide (Priority: high) - **MERGED #9**
-- [ ] Audit all existing tests in checks.d/ for safety (Priority: high)
-- [ ] Verify none of the current tests are destructive (Priority: high)
+- [x] Audit all existing tests in checks.d/ for safety (Priority: high) - **MERGED via commit eede443 - 36 new checks added**
+- [x] Verify none of the current tests are destructive (Priority: high) - **MERGED via commit eede443 - all checks are read-only**
 - [ ] Add basic metadata to tests (scope: cluster-wide vs node-specific, description) (Priority: high)
 - [ ] Add --help or description to each test (what/why/how) (Priority: high)
-- [ ] Set up basic CI pipeline (linting, unit tests) (Priority: high)
+- [x] Set up basic CI pipeline (linting, unit tests) (Priority: high) - **MERGED via commit 77ed3da**
 - [ ] Update README.md with comprehensive usage examples (Priority: high)
 - [ ] Ensure container build works for disconnected environments (Priority: high)
 - [ ] Add basic test suites/groups (e.g., basic, extended) (Priority: medium)
@@ -75,17 +75,27 @@ OpenShift Virtualization already ships `ocp-virt-validation-checkup` with a simp
 - [ ] Add LICENSE file (Apache 2.0) (Priority: high)
 - [x] Create initial CONTRIBUTING.md guide (Priority: high) - **MERGED #9**
 - [x] Add OWNERS files (Priority: high) - **MERGED #9**
-- [x] Must-gather integration complete (Priority: high) - **MERGED #4, #6**
+- [x] Must-gather integration complete (Priority: high) - **MERGED #4, #6, #8**
   - gather script with auto-detect mode (must-gather vs normal)
   - Runtime download of oc/virtctl from cluster (no RBAC required)
   - DEBUG_TOOL support for testing
   - Human-readable results summary
   - RBAC fixes and namespace scoping
+- [x] GitHub Actions lint workflow (Priority: high) - **MERGED commit 77ed3da**
+  - Shellcheck validation for all bash scripts
+  - Automated CI on pull requests
+- [x] 36 new validation checks added (Priority: high) - **MERGED commit eede443**
+  - **OpenShift platform checks (16 new):** cluster version, operators, limits, deprecated APIs, node health, cgroup version, machine config, MCP health, machineset replicas, IP stack, SR-IOV, DNS, monitoring, storage provisioners, PV status, pod restarts, PDB blocking, operator state
+  - **Virtualization checks (20 new):** node memory, CPU/memory overhead, machine health checks, VM run strategy, quota resources, Windows VM config, disk expansion, HPP, storage checkup, SR-IOV operator, migration (storage/policies/network/CPU/headroom), upgrade readiness, backup
+  - **Total checks now: 54** (26 OpenShift platform + 28 virtualization)
+- [x] oc_cached helper (Priority: medium) - **MERGED commit eede443**
+  - Caches oc command results to reduce API calls
+  - Improves performance for must-gather execution
 - [ ] Define test development workflow and validation process (Priority: high)
 - [ ] Create docs/ directory with initial architecture overview (Priority: high)
-- [ ] Set up CI pipeline (linting, unit tests, integration tests, test validation) (Priority: high)
-- [ ] Audit all existing tests in checks.d/ (Priority: high)
-- [ ] Verify none of the current tests are destructive (Priority: high)
+- [x] Set up CI pipeline (linting, unit tests, integration tests, test validation) (Priority: high) - **MERGED via commit 77ed3da**
+- [x] Audit all existing tests in checks.d/ (Priority: high) - **MERGED via commit eede443**
+- [x] Verify none of the current tests are destructive (Priority: high) - **MERGED via commit eede443**
 - [ ] Add metadata to tests (cluster-wide vs node-specific) (Priority: high)
 - [ ] Define test metadata schema (scope, RBAC requirements, disruption level, description, version, class, dependencies, timeout, resource limits, parameters, suites, OCP version compatibility, topology requirements, artifacts, node selector/affinity, warmup/cooldown, external service dependencies, cacheable, architecture requirements, config dependencies) (Priority: high)
 - [ ] Define test classes (basic [default], performance, load-testing, scalability) (Priority: high)
