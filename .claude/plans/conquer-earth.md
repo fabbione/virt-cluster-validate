@@ -30,7 +30,7 @@ Ship as part of OCPv (OpenShift Container Platform Virtualization) to provide:
 
 **Scope:** Enhanced CLI with proper licensing, documentation, test validation, and basic metadata support.
 
-- [ ] Add LICENSE file (Apache 2.0) (Priority: high)
+- [x] Add LICENSE file (Apache 2.0) (Priority: high) - **MERGED #12**
 - [x] Create CONTRIBUTING.md guide (Priority: high) - **MERGED #9**
 - [x] Audit all existing tests in checks.d/ for safety (Priority: high) - **MERGED via commit eede443 - 36 new checks added**
 - [x] Verify none of the current tests are destructive (Priority: high) - **MERGED via commit eede443 - all checks are read-only**
@@ -38,7 +38,7 @@ Ship as part of OCPv (OpenShift Container Platform Virtualization) to provide:
 - [ ] Add --help or description to each test (what/why/how) (Priority: high)
 - [x] Set up basic CI pipeline (linting, unit tests) (Priority: high) - **MERGED via commit 77ed3da**
 - [ ] Update README.md with comprehensive usage examples (Priority: high)
-- [ ] Ensure container build works for disconnected environments (Priority: high)
+- [x] Ensure container build works for disconnected environments (Priority: high) - **MERGED #16 - ubi9-minimal base, 84% size reduction**
 - [ ] Add basic test suites/groups (e.g., basic, extended) (Priority: medium)
 - [ ] Validate RBAC requirements and document per test (Priority: medium)
 - [ ] Create initial docs/ with architecture overview (Priority: medium)
@@ -72,7 +72,12 @@ OpenShift Virtualization already ships `ocp-virt-validation-checkup` with a simp
 ---
 
 ### Phase 0: Test Audit & Metadata
-- [ ] Add LICENSE file (Apache 2.0) (Priority: high)
+- [x] Add LICENSE file (Apache 2.0) (Priority: high) - **MERGED #12**
+  - Full Apache 2.0 license text at repository root
+  - License headers with Red Hat copyright on 68 source files
+  - `hack/check-license-headers.sh` validation script (check + --update mode)
+  - CI integration in lint workflow
+  - Files excluded: documentation (README.md, CONTRIBUTING.md), metadata (OWNERS files)
 - [x] Create initial CONTRIBUTING.md guide (Priority: high) - **MERGED #9**
 - [x] Add OWNERS files (Priority: high) - **MERGED #9**
 - [x] Must-gather integration complete (Priority: high) - **MERGED #4, #6, #8**
@@ -411,6 +416,24 @@ OpenShift Virtualization already ships `ocp-virt-validation-checkup` with a simp
 
 ## Done
 <!-- Completed tasks -->
+
+### Container Optimization (July 2026)
+- **Container image size reduction** - **MERGED #16**
+  - Switched from `ubi9/python-311` to `ubi9/ubi-minimal` base image
+  - Size: ~414 MB → ~65 MB compressed (84% reduction, ~182 MB uncompressed)
+  - Security: 189 CVEs → minimal base with far fewer packages
+  - Package manager: dnf → microdnf
+  - Explicitly installed: python3.11, jq, tar, gzip, rsync, which, util-linux-core
+  - All dependencies verified (no pip packages needed, all Python stdlib)
+  - Must-gather tested successfully with runtime oc/virtctl downloads
+
+### Licensing (July 2026)
+- **Apache License 2.0 implementation** - **MERGED #12**
+  - LICENSE file with full Apache 2.0 text
+  - License headers on 68 source files (shell, Python, YAML, Containerfile)
+  - `hack/check-license-headers.sh` for validation and copyright year updates
+  - CI integration in `.github/workflows/lint.yml`
+  - Documentation files (README.md, CONTRIBUTING.md) and metadata (OWNERS) excluded from headers per convention
 
 ## Evaluated but Not Implementing
 <!-- Features that were considered but decided against or deferred indefinitely -->
